@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <title>Code Quiz</title>
+  </head>
+  <body>
+    <header id="header"class="border-bottom border-dark mb-3 sticky-top">
+      <div class="row">
+        <div class="col-md-6 bg-info">
+          <div class="nav text-center" id="name">
+              <a id="view-highscore" class ="text-light" href="#">View Highscores</a>
+          </div>
+        </div>
+        <div class="col-md-6 bg-dark">
+          <div class="text-center text-light">
+            Time: <span id="time-left">60</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container text-center">
+      <div id="home-screen" class="d-block" >
+        <h1>Code Quiz</h1>
+        <p>
+          Try to answer the folowing code-related questions within the time
+          limit. Keep in mind that incorrect answers will penalise your
+          scoretime by ten seconds!
+        </p>
+        <div>
+          <button type="button" class="btn btn-primary" id="start-button">
+            Start
+          </button>
+        </div>
+      </div>
+      <div id="question-screen" class="d-none">
+          <h1>Questions</h1>
+          <h2 id="question-name"></h2>
+          <div id="answers"></div>
+          <h3 id="answer-output"></h3>
+      </div>
+      <div id="complete-screen" class="d-none">
+          <h1>Congratulations!!</h1>
+          <h2>You finished with a score of <span id="final-score"></span></h2>
+          <div>Enter Initals:
+            <input id="initials" type="text">
+            <button id="submit-score-btn">Submit</button>
+          </div>
+      </div>
+      <div id="highscore-screen" class="d-none">
+        <h1>Highscores</h1>
+        <p id="highscore-list"></p>
+        <button id="clear-highscore">Clear Highscore List</button>
+        <button id="go-home">Go Home</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
