@@ -43,6 +43,7 @@ function questionDisplay() {
     var choiceEl = document.createElement("button");
     // adds a value so that answer can be checked
     choiceEl.setAttribute("value", choice);
+    choiceEl.setAttribute("class", "btn btn-primary w-50 m-1");
 
     // numbers answers and outputs choices
     choiceEl.textContent = i + 1 + ". " + choice;
@@ -109,39 +110,56 @@ function highscores() {
   highscoreScreenEl.setAttribute("class", "d-block");
 
   var initials = userInitialsEl.value;
-  var currentScore = { score: totalSeconds, initials: initials };
+  if (initials !== "") {
+    var highscoreList =
+      JSON.parse(window.localStorage.getItem("highscoreListStorage")) || [];
 
-  // retrieve highscores if any, if not a blanck array
-  var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+    var currentScore = { score: totalSeconds, initials: initials };
 
-  // adds current score to high score
-  highscores.push(currentScore);
-  // adds highscores to local storage
-  window.localStorage.setItem("highscores", JSON.stringify(highscores));
+    // retrieve highscores if any, if not a blanck array
 
-  //   var highscorelistEl = document.createElement("li");
-  //   highscorelistEl.textContent = score.initials + " - " + score.score;
-  //   highscoreListEl.appendChild(highscorelistEl);
+    // adds current score to high score
+    highscoreList.push(currentScore);
+    // adds highscores to local storage
+    window.localStorage.setItem(
+      "highscoreListStorage",
+      JSON.stringify(highscoreList)
+    );
+  }
+  highscorePage();
 }
 
-var highscoreList = JSON.parse(window.localStorage.getItem("highscores")) || [];
+function highscorePage() {
+  // clears list first otherwise repeats lists
+  highscoreListEl.textContent = "";
 
-highscoreList.forEach(function(score) {
-  if (initials !== "") {
-    var highscorelistEl = document.createElement("li");
-    highscorelistEl.textContent = score.initials + " - " + score.score;
-    highscoreListEl.appendChild(highscorelistEl);
-  }
-});
+  var newhighscoreList =
+    JSON.parse(window.localStorage.getItem("highscoreListStorage")) || [];
+
+  //    creates li elements
+  newhighscoreList.forEach(function(score) {
+    var highscoreLi = document.createElement("li");
+    highscoreLi.textContent = score.initials + " - " + score.score;
+    highscoreListEl.appendChild(highscoreLi);
+  });
+}
 
 // clears highscore list
 function clearHighScoreList() {
-  window.localStorage.removeItem("highscores");
+  window.localStorage.removeItem("highscoreListStorage");
   window.location.reload();
 }
 
+// resets the input text field
+function resetInitials() {
+  userInitialsEl.value = "";
+}
+
 startButtonEl.addEventListener("click", quizStart);
-submitScoreButtonEl.addEventListener("click", highscores);
+submitScoreButtonEl.addEventListener("click", function() {
+  highscores();
+  resetInitials();
+});
 viewHighscoreEl.addEventListener("click", highscores);
 clearHighScoreListEl.addEventListener("click", clearHighScoreList);
 goHomeBtnEl.addEventListener("click", function() {
@@ -151,6 +169,12 @@ goHomeBtnEl.addEventListener("click", function() {
 });
 
 var questions = [
+  {
+    question:
+      "Which built-in method removes the last element from an array and returns that element?",
+    choices: ["last()", "get()", "pop()", "None of the above"],
+    answer: "pop()"
+  },
   {
     question: "Commonly used data types DO NOT include:",
     choices: ["strings", "booleans", "alerts", "numbers"],
