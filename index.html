@@ -11,7 +11,7 @@
     />
     <title>Code Quiz</title>
   </head>
-  <body>
+  <body class="bg-light">
     <header id="header" class="border-bottom border-dark mb-3 sticky-top">
       <div class="row">
         <div class="col-md-6 bg-info">
@@ -28,46 +28,44 @@
         </div>
       </div>
     </header>
-    <div class="bg-primary">
-      <div class="container text-center">
-        <div id="home-screen" class="d-block">
-          <h1>Code Quiz</h1>
-          <p>
-            Try to answer the folowing code-related questions within the time
-            limit. Keep in mind that incorrect answers will penalise your
-            scoretime by ten seconds!
-          </p>
-          <div>
-            <button type="button" class="btn btn-primary" id="start-button">
-              Start
-            </button>
-          </div>
-        </div>
-        <div id="question-screen" class="d-none">
-          <h1>Questions</h1>
-          <h2 id="question-name"></h2>
-          <div id="answers"></div>
-          <h3 id="answer-output"></h3>
-        </div>
-        <div id="complete-screen" class="d-none">
-          <h1>Congratulations!!</h1>
-          <h2>You finished with a score of <span id="final-score"></span></h2>
-          <div>
-            Enter Initals:
-            <input id="initials" type="text" />
-            <button id="submit-score-btn" class="btn btn-primary">
-              Submit
-            </button>
-          </div>
-        </div>
-        <div id="highscore-screen" class="d-none">
-          <h1>Highscores</h1>
-          <p id="highscore-list"></p>
-          <button id="clear-highscore" class="btn btn-primary">
-            Clear Highscore List
+    <div class="container text-center">
+      <div id="home-screen" class="d-block">
+        <h1>Code Quiz</h1>
+        <p>
+          Try to answer the folowing code-related questions within the time
+          limit. Keep in mind that incorrect answers will penalise your
+          scoretime by ten seconds!
+        </p>
+        <div>
+          <button type="button" class="btn btn-primary" id="start-button">
+            Start
           </button>
-          <button id="go-home" class="btn btn-primary">Go Home</button>
         </div>
+      </div>
+      <div id="question-screen" class="d-none">
+        <h1>Questions</h1>
+        <h2 id="question-name"></h2>
+        <div id="answers"></div>
+        <h3 id="answer-output"></h3>
+      </div>
+      <div id="complete-screen" class="d-none">
+        <h1>Congratulations!!</h1>
+        <h2>You finished with a score of <span id="final-score"></span></h2>
+        <div>
+          Enter Initals:
+          <input id="initials" type="text" />
+          <button id="submit-score-btn" class="btn btn-primary">
+            Submit
+          </button>
+        </div>
+      </div>
+      <div id="highscore-screen" class="d-none">
+        <h1>Highscores</h1>
+        <p id="highscore-list"></p>
+        <button id="clear-highscore" class="btn btn-primary">
+          Clear Highscore List
+        </button>
+        <button id="go-home" class="btn btn-primary">Go Home</button>
       </div>
     </div>
     <script src="script.js"></script>

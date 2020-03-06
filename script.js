@@ -20,12 +20,9 @@ var goHomeBtnEl = document.getElementById("go-home");
 var timeLeftEl = document.getElementById("time-left");
 var startButtonEl = document.getElementById("start-button");
 
-var totalSeconds = 60;
-var interval;
-questionIndex = 0;
-
 // once start is clicked display changes to questions and hides start screen
 function quizStart() {
+  totalSeconds = 60;
   questionIndex = 0;
   homeScreenEl.setAttribute("class", "d-none");
   questionScreenEl.setAttribute("class", "d-block");
@@ -38,7 +35,7 @@ function questionDisplay() {
   questionNameEl.textContent = questions[questionIndex].question;
   answersEl.innerHTML = "";
   //   loops through choices and adds buttons for each one
-  for (i = 0; i < questions[questionIndex].choices[i].length; i++) {
+  for (i = 0; i < questions[questionIndex].choices.length; i++) {
     var choice = questions[questionIndex].choices[i];
     var choiceEl = document.createElement("button");
     // adds a value so that answer can be checked
@@ -60,8 +57,10 @@ function questionClick() {
   if (this.value !== questions[questionIndex].answer) {
     totalSeconds -= 15;
     answersOutputEl.textContent = "Incorrect";
+    answersOutputEl.style.color = 'red';
   } else {
     answersOutputEl.textContent = "Correct";
+    answersOutputEl.style.color = 'green';
     questionIndex++;
     if (questionIndex === questions.length) {
       clearInterval(interval);
@@ -95,8 +94,7 @@ function startTimer() {
 // once time is this function runs which resets back to main screen
 function timesUp() {
   alert("You have run out of time!!!!");
-  totalSeconds = 60;
-  homeScreenEl.setAttribute("class", "d-block");
+   homeScreenEl.setAttribute("class", "d-block");
   questionScreenEl.setAttribute("class", "d-none");
 }
 
