@@ -1,1 +1,7 @@
+# Quiz
+https://pete331.github.io/Quiz/.
+This program was created to showcase various javascript objects in various functions to go through a quiz and store scores in local storage. 
+It also retrieves scores from local storage with a function to clear these scores.
+It access's and appends various html elements. Including hiding and showing various screens all with the one html page.
 
+Once the start button is pressed the timer reduces each second - if a wrong answer is selected 15 seconds are taken from the time.

@@ -22,6 +22,7 @@ var startButtonEl = document.getElementById("start-button");
 
 // once start is clicked display changes to questions and hides start screen
 function quizStart() {
+  // sets global variables that are reset each time quizStart is run - still trying to get my head around getting variables accross functions with making them global
   totalSeconds = 60;
   questionIndex = 0;
   homeScreenEl.setAttribute("class", "d-none");
@@ -56,11 +57,19 @@ function questionClick() {
   // checks to see if wrong choice is selected - minus 15 seconds if incorrect
   if (this.value !== questions[questionIndex].answer) {
     totalSeconds -= 15;
+
     answersOutputEl.textContent = "Incorrect";
-    answersOutputEl.style.color = 'red';
+    answersOutputEl.style.color = "red";
+    // text dissapears after 1 second
+    setTimeout(function() {
+      answersOutputEl.innerHTML = "";
+    }, 1000);
   } else {
     answersOutputEl.textContent = "Correct";
-    answersOutputEl.style.color = 'green';
+    answersOutputEl.style.color = "green";
+    setTimeout(function() {
+      answersOutputEl.innerHTML = "";
+    }, 1000);
     questionIndex++;
     if (questionIndex === questions.length) {
       clearInterval(interval);
@@ -76,6 +85,8 @@ function completeDisplay() {
   questionScreenEl.setAttribute("class", "d-none");
   completeScreenEl.setAttribute("class", "d-block");
   finalScoreEl.textContent = totalSeconds;
+  // stops timer when complete
+  clearInterval(interval);
 }
 
 // function runds from quizstart function and checks to see if hits 0 - if so runds timesup function
@@ -94,11 +105,13 @@ function startTimer() {
 // once time is this function runs which resets back to main screen
 function timesUp() {
   alert("You have run out of time!!!!");
-   homeScreenEl.setAttribute("class", "d-block");
+  homeScreenEl.setAttribute("class", "d-block");
   questionScreenEl.setAttribute("class", "d-none");
 }
 
 function highscores() {
+  // clears timer if high scores clicked during quiz as timer keeps going otherwise
+  clearInterval(interval);
   // hide header
   headerEl.setAttribute("class", "d-none");
   // shows correct screen
@@ -134,6 +147,11 @@ function highscorePage() {
   var newhighscoreList =
     JSON.parse(window.localStorage.getItem("highscoreListStorage")) || [];
 
+  // sorts highscores by score
+  newhighscoreList.sort(function(a, b) {
+    return a.score - b.score;
+  });
+
   //    creates li elements
   newhighscoreList.forEach(function(score) {
     var highscoreLi = document.createElement("li");
@@ -164,50 +182,5 @@ goHomeBtnEl.addEventListener("click", function() {
   homeScreenEl.setAttribute("class", "d-block");
   headerEl.setAttribute("class", "d-block");
   highscoreScreenEl.setAttribute("class", "d-none");
+  timeLeftEl.textContent = 60;
 });
-
-var questions = [
-  {
-    question:
-      "Which built-in method removes the last element from an array and returns that element?",
-    choices: ["last()", "get()", "pop()", "None of the above"],
-    answer: "pop()"
-  },
-  {
-    question: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts"
-  },
-
-  {
-    question:
-      "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses"
-  },
-
-  {
-    question: "Arrays in JavaScript can be used to store ____.",
-    choices: [
-      "numbers and strings",
-      "other arrays",
-      "booleans",
-      "all of the above"
-    ],
-    answer: "all of the above"
-  },
-
-  {
-    question:
-      "String values must be enclosed within ____ when being assigned to variables.",
-    choices: ["commas", "curly brackets", "quotes", "parentheses"],
-    answer: "quotes"
-  },
-
-  {
-    question:
-      "A very useful tool used during development and debugging for printing content to the debugger is:",
-    choices: ["JavaScript", "terminal / bash", "for loops", "console.log"],
-    answer: "console.log"
-  }
-];
